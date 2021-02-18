@@ -1,0 +1,15 @@
+// yc1: Thong ke doanh thu, so luong khach theo quy, nam
+select non empty {[Measures].[TOTAL AMOUNT], [Measures].[TOTAL PASSENGER COUNT]} on columns,
+non empty crossjoin([ID PU TIME].[Time].[THANG], [ID PU TIME].[QUY].[QUY]) on rows from [DDS Taxi];
+
+// yc2: Phan tich doanh thu cac chuyen di theo street, borough
+select non empty [Measures].[TOTAL AMOUNT] on columns,
+non empty crossjoin([PICKUP LOCATION].[BOROUGH].[BOROUGH], [PICKUP LOCATION].[STREET].[STREET]) on rows from [DDS Taxi];
+
+// yc3: Thong ke luong thue, phi, tien boa theo thang, nam
+select non empty {[Measures].[TOTAL FARE AMOUNT], [Measures].[TOTAL TIP AMOUNT], [Measures].[TOTAL TOLLS AMOUNT]} on columns,
+non empty crossjoin([ID PU TIME].[Time].[THANG], [ID PU TIME].[NAM].[NAM]) on rows from [DDS Taxi];
+
+// yc4: Thong ke so luong chuyen di theo tung borough
+select non empty [Measures].[TRIP COUNT] on columns,
+non empty [PICKUP LOCATION].[BOROUGH].[BOROUGH] on rows from [DDS Taxi];
